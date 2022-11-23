@@ -6,6 +6,7 @@ import { join } from 'path';
 
 import { AppService } from './app.service';
 import {AppUpdate} from "./app.update"
+import { TaskEntity } from './task.entity';
 
 const sessioons = new LocalSession({database: "session_db.json"});
 
@@ -21,11 +22,12 @@ const sessioons = new LocalSession({database: "session_db.json"});
       port: 5432,
       database: "todo-app-tg-bot",
       username: "postgres",
-      password: "",
+      password: "root",
       entities: [join(__dirname, '**', '*.entity{.ts,.js}')],
       migrations: [join(__dirname, '**', '*.migration{.ts,.js}')],
       synchronize: true,
-    })
+	 }),
+	 TypeOrmModule.forFeature([TaskEntity]),
   ],
   providers: [AppService, AppUpdate],
 })
